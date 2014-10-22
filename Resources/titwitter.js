@@ -274,7 +274,7 @@ var TiTwitter = {};
   };
   // ユーザホームタイムラインを取得する。
   TiTwitter.loadHomeTimeline = function() {
-    twitterApi.statuses_home_timeline({
+    twitterApi.favorites({
       onSuccess: function(tweets) {
         // データをクリア
         TiTwitter.UI.tableView.data = [];
