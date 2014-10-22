@@ -552,4 +552,11 @@ var TwitterApi = function(params) {
         params.method = 'GET';
         return self.callApi(params);
     };
+
+    //friends.ids
+    this.friends_ids = function(params) {
+        params.url = 'https://api.twitter.com/1.1/friends/ids.json';
+        params.method = 'GET';
+        return self.callApi(params);
+    };
 };
