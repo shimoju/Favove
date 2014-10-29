@@ -292,7 +292,9 @@ var TiTwitter = {};
                   // .textが本文、.search()で検索してURL付きツイートのみを抽出
                   // /https?:\/\//は正規表現というもの(http://またはhttps://という意味)
                   // => URL付きのときのみ実行される
-                  TiTwitter.UI.tableView.appendRow(TiTwitter.UI.createTableViewRow(tweets[i]));
+                  if (tweets[i].text.search(/https?:\/\//) != -1) {
+                    TiTwitter.UI.tableView.appendRow(TiTwitter.UI.createTableViewRow(tweets[i]));
+                  }
               }
             },
             onError: function(error) {
