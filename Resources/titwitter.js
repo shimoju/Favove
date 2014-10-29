@@ -274,17 +274,32 @@ var TiTwitter = {};
   };
   // ユーザホームタイムラインを取得する。
   TiTwitter.loadHomeTimeline = function() {
-    twitterApi.favorites({
-      onSuccess: function(tweets) {
+    twitterApi.friends_ids({
+      onSuccess: function(friends) {
+        // フォローから15人分選択
+        var target = friends.ids.slice(0, 15);
+
         // データをクリア
         TiTwitter.UI.tableView.data = [];
-        for(var i=0;i<tweets.length;i++) {
-            // .textが本文、.search()で検索してURL付きツイートのみを抽出
-            // /https?:\/\//は正規表現というもの(http://またはhttps://という意味)
-            // => URL付きのときのみ実行される
-          if (tweets[i].text.search(/https?:\/\//) != -1) {
-            TiTwitter.UI.tableView.appendRow(TiTwitter.UI.createTableViewRow(tweets[i]));
-          }
+
+        // 15人のフォローユーザーをforループ
+        for (var i = 0; i < target.length; i++) {
+          // それぞれのfavを取得
+          twitterApi.favorites({
+            user_id: target[i],
+            onSuccess: function(tweets) {
+              for(var i=0;i<tweets.length;i++) {
+                  // .textが本文、.search()で検索してURL付きツイートのみを抽出
+                  // /https?:\/\//は正規表現というもの(http://またはhttps://という意味)
+                  // => URL付きのときのみ実行される
+                  TiTwitter.UI.tableView.appendRow(TiTwitter.UI.createTableViewRow(tweets[i]));
+              }
+            },
+            onError: function(error) {
+              Ti.API.error(error);
+            }
+          });
+
         }
       },
       onError: function(error) {
