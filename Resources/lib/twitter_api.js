@@ -302,6 +302,25 @@ var TwitterApi = function(params) {
         return self.callApi(params);
     };
 
+    //trends.available
+    this.trends_available = function(params) {
+        params.url = 'https://api.twitter.com/1.1/trends/available.json';
+        params.method = 'GET';
+        return self.callApi(params);
+    };
+    //trends.closest
+    this.trends_closest = function(params) {
+        params.url = 'https://api.twitter.com/1.1/trends/closest.json';
+        params.method = 'GET';
+        return self.callApi(params);
+    };
+    //trends.place
+    this.trends_place = function(params) {
+        params.url = 'https://api.twitter.com/1.1/trends/place.json';
+        params.method = 'GET';
+        return self.callApi(params);
+    };
+
     //user/lists_create
     //Creates a new list for the authenticated user.
     this.user_lists_create = function(params) {
