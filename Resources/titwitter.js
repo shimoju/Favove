@@ -288,7 +288,7 @@ var TiTwitter = {};
           twitterApi.favorites({
             user_id: target[i],
             onSuccess: function(tweets) {
-              for(var i=0;i<tweets.length;i++) {
+              for(var i = 0; i < tweets.length; i++) {
                 // .textが本文、.search()で検索してURL付きツイートのみを抽出
                 // /https?:\/\//は正規表現というもの(http://またはhttps://という意味)
                 // => URL付きのときのみ実行される
