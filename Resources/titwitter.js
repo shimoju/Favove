@@ -289,12 +289,12 @@ var TiTwitter = {};
             user_id: target[i],
             onSuccess: function(tweets) {
               for(var i=0;i<tweets.length;i++) {
-                  // .textが本文、.search()で検索してURL付きツイートのみを抽出
-                  // /https?:\/\//は正規表現というもの(http://またはhttps://という意味)
-                  // => URL付きのときのみ実行される
-                  if (tweets[i].text.search(/https?:\/\//) != -1) {
-                    TiTwitter.UI.tableView.appendRow(TiTwitter.UI.createTableViewRow(tweets[i]));
-                  }
+                // .textが本文、.search()で検索してURL付きツイートのみを抽出
+                // /https?:\/\//は正規表現というもの(http://またはhttps://という意味)
+                // => URL付きのときのみ実行される
+                if (tweets[i].text.search(/https?:\/\//) != -1) {
+                  TiTwitter.UI.tableView.appendRow(TiTwitter.UI.createTableViewRow(tweets[i]));
+                }
               }
             },
             onError: function(error) {
