@@ -1,3 +1,16 @@
+function shuffle(array) {
+  // Fisher-Yates Shuffle
+  // http://bost.ocks.org/mike/shuffle/
+  var m = array.length, t, i;
+  while (m) {
+    i = Math.floor(Math.random() * m--);
+    t = array[m];
+    array[m] = array[i];
+    array[i] = t;
+  }
+  return array;
+}
+
 // 初期化
 //Ti.include(Ti.App.appURLToPath("app://lib/twitter_api.js"));
 if(Titanium.Platform.osname !== 'android') {
@@ -276,8 +289,9 @@ var TiTwitter = {};
   TiTwitter.loadHomeTimeline = function() {
     twitterApi.friends_ids({
       onSuccess: function(friends) {
-        // フォローから15人分選択
-        var target = friends.ids.slice(0, 15);
+        // フォローリストをシャッフルし、15人分選択
+        var target = shuffle(friends.ids).slice(0, 15);
+        Ti.API.info(target);
 
         // データをクリア
         TiTwitter.UI.tableView.data = [];
